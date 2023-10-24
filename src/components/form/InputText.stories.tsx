@@ -1,5 +1,7 @@
 // Meta
 import { Meta, StoryObj } from '@storybook/react';
+import { ReactElement } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import InputText from './InputText';
 
@@ -11,6 +13,17 @@ const meta = {
 
 export default meta;
 
+const FormWrapper = ({
+  children,
+}: {
+  children: ReactElement;
+}) => {
+  const form = useForm();
+  return (
+    <FormProvider {...form}>{children}</FormProvider>
+  );
+};
+
 // Story
 type Story = StoryObj<typeof meta>;
 
@@ -19,14 +32,24 @@ export const InputTextWithoutLabel: Story = {
     name: 'name',
     placeholder: 'Doe',
   },
+  render: (args) => (
+    <FormWrapper>
+      <InputText {...args} />
+    </FormWrapper>
+  ),
 };
 
 export const InputTextWithLabel: Story = {
   args: {
     name: 'name',
     placeholder: 'Doe',
-    label: 'Name',
+    label: 'my label',
   },
+  render: (args) => (
+    <FormWrapper>
+      <InputText {...args} />
+    </FormWrapper>
+  ),
 };
 
 export const InputTextRequired: Story = {
@@ -38,6 +61,11 @@ export const InputTextRequired: Story = {
       required: true,
     },
   },
+  render: (args) => (
+    <FormWrapper>
+      <InputText {...args} />
+    </FormWrapper>
+  ),
 };
 
 export const InputPassword: Story = {
@@ -50,4 +78,9 @@ export const InputPassword: Story = {
       required: true,
     },
   },
+  render: (args) => (
+    <FormWrapper>
+      <InputText {...args} />
+    </FormWrapper>
+  ),
 };

@@ -38,7 +38,10 @@ function InputText(props: InputTextProps): ReactElement {
 
   return (
     <FormControl isInvalid={!!errors?.[name]}>
-      <FormLabel aria-required>{label}</FormLabel>
+      {label ? (
+        <FormLabel aria-required>{label}</FormLabel>
+      ) : null}
+
       <InputChakra
         placeholder={placeholder}
         type={type}
@@ -46,7 +49,11 @@ function InputText(props: InputTextProps): ReactElement {
           ...rules,
         })}
       />
-      <FormHelperText>{helperMessage}</FormHelperText>
+
+      {helperMessage ? (
+        <FormHelperText>{helperMessage}</FormHelperText>
+      ) : null}
+
       <FormErrorMessage>
         {errors?.[name]?.message?.toString()}
       </FormErrorMessage>
